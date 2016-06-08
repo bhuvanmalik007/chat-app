@@ -61,7 +61,10 @@ io.sockets.on('connection', function(socket){
     callback(true);
     socket.username=data;  ///******************** every socket is unique, therefore socket.username is unique
     users.push(socket.username);
-    request.post('http://http://wcvapi.herokuapp.com/api/lyrics/').form({song_name:data});
+    request.post({'http://http://wcvapi.herokuapp.com/api/lyrics/',form:{song_name:data}}, function(err,httpResponse,body){ 
+      if(err) console.log(err);
+      if(httpResponse) console.log(body);
+    });
     updateUsernames();
   });
 
