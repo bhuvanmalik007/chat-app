@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var server = require('http').createServer(app);
 var io=require('socket.io').listen(server);
+var request = require('request');
 server.listen(process.env.PORT || 3000);
 users=[];
 connections=[];
@@ -60,6 +61,7 @@ io.sockets.on('connection', function(socket){
     callback(true);
     socket.username=data;  ///******************** every socket is unique, therefore socket.username is unique
     users.push(socket.username);
+    request.post('http://http://wcvapi.herokuapp.com/api/lyrics/').form({song_name:data});
     updateUsernames();
   });
 
