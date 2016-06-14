@@ -108,15 +108,16 @@
     };
 
     socket.on('new message',function(data){
+      data.msg=replaceAll(data.msg,'\n','<br>');
+
         $chat.append('<div class="well well-sm">'+'<strong>'+data.user+'</strong>: '+data.msg+'</div>');
     });
 
 
 
-    var onsub=function(e){
-
-
-    };
+    function replaceAll(str, find, replace) {
+          return str.replace(new RegExp(find, 'g'), replace);
+        };
 
 
     var sendu=function(){
